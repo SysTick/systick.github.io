@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[linux命令学习-top]]></title>
+    <url>%2F2018%2F01%2F24%2Flinux-cmd-top%2F</url>
+    <content type="text"><![CDATA[1# top //linux 命令行 图中所示是在我自己的ubuntu中使用top时所展示的。 top 命令12345678top - 10:42:38 up 2 days, 1:00, 1 user, load average: 0.30, 0.24, 0.18Tasks: 275 total, 1 running, 274 sleeping, 0 stopped, 0 zombie%Cpu(s): 2.1 us, 0.5 sy, 0.0 ni, 97.3 id, 0.0 wa, 0.0 hi, 0.1 si, 0.0 stKiB Mem : 4028316 total, 152980 free, 1603968 used, 2271368 buff/cacheKiB Swap: 2094076 total, 2094076 free, 0 used. 1970028 avail MemPID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND 49452 li 20 0 2179732 298492 186780 S 13.9 7.4 0:36.57 Web Content 解释 top - 10:42:38 up 2 days, 1:00, 1 user, load average: 0.30, 0.24, 0.1810:42:38 — 当前系统时间up 2 days, 1:00 — 系统系统运行时间1 users — 当前登录用户数load average: 0.30, 0.24, 0.18 — 系统负载 三个数分别是1分钟、5分钟、15分钟的负载情况 Tasks: 275 total, 1 running, 274 sleeping, 0 stopped, 0 zombie、Tasks: 任务/进程275 total, 总共275个进程1 running, 1个正在运行进程274 sleeping, 274个睡眠进程0 stopped, 0个停止的进程0 zombie, 0个僵尸进程 %Cpu(s): 2.1 us, 0.5 sy, 0.0 ni, 97.3 id, 0.0 wa, 0.0 hi, 0.1 si, 0.0 st%Cpu(s): CPU占用2.1 us, 用户空间占用CPU百分比0.5 sy, 内核空间占用CPU百分比0.0 ni, 用户进程空间内改变过优先级的进程占用的百分比97.3 id, 空闲CPU百分比0.0 wa, 等待输入输出(IO)的CPU百分比0.0 hi, 硬件CPU中断占用的百分比0.1 si, 软件中断占用的百分比0.0 st 虚拟机占用百分比 KiB Mem : 4028316 total, 152980 free, 1603968 used, 2271368 buff/cacheKiB Mem : 物理内存4028316 total, 物理内存总量152980 free, 空闲内在总量1603968 used, 使用的物理内存总量2271368 buff/cache 用作内核缓存的内在总量 KiB Swap: 2094076 total, 2094076 free, 0 used. 1970028 avail MemKiB Swap: 交换分区2094076 total, 交换分区总量2094076 free, 空闲交换分区总量0 used. 使用的交换分区总量1970028 avail Mem 可用内存总量 PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMANDPID 进程IDUSER 进程所有者PR 优先级NI nice值，负值表示高优先级，正值表示低优先级VIRT 进程使用的虚拟内在总量，单位kb VIRT=SWAP+RESRES 进程使用的未被换出的 内存大小，单位kb RES=CODE+DATASHR 共享内存大小，单位kbS 进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程%CPU 上次更新到现在的CPU时间占用百分比%MEM 进程使用的物理内存百分比TIME+ 进程使用的CPU时间总计，单位1/100秒COMMAND 进程名称（命令名/命令行） 总结top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器。top是一个动态显示过程,即可以通过用户按键来不断刷新当前状态.如果在前台执行该命令,它将独占前台,直到用户终止该程序为止.比较准确的说,top命令提供了实时的对系统处理器的状态监视.它将显示系统中CPU最“敏感”的任务列表.该命令可以按CPU使用.内存使用和执行时间对任务进行排序；而且该命令的很多特性都可以通过交互式命令或者在个人定制文件中进行设定。 更详细的解释看top(1) 参考文档 Linux top命令的用法详细详解 linux的top命令参数详解]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>top</tag>
+        <tag>linux_cmd</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[在ubuntu系统下配置shadowsocks]]></title>
+    <url>%2F2017%2F10%2F08%2Fconfigure-ss-on-the-ubuntu%2F</url>
+    <content type="text"><![CDATA[建议安装pytyon版本的shadowsocks。可以参照本文来配置，也可以使用文末参考中的自动安装脚本安装。 配置环境本文所用的配置环境如下： 123456$ lsb_release -aNo LSB modules are available.Distributor ID: UbuntuDescription: Ubuntu 16.04.2 LTSRelease: 16.04Codename: xenial 安装及配置步骤安装及配置分为3步。 安装12$ sudo apt-get install python-gevent python-pip$ sudo pip install shadowsocks 创建配置文件在/etc目录下创建shadowsocks.json配置文件 1vim /etc/shadowsocks.json 单用户配置文件1234567&#123; "server":"0.0.0.0", "server_port":9696, "password":"客户端登录密码", "timeout":600, "method":"aes-256-cfb"&#125; 多用户配置文件123456789&#123; "server":"0.0.0.0", "password":&#123; "9696":"设定9696端口密码", "9898":"设定9898端口密码", &#125;, "timeout":600, "method":"aes-256-cfb"&#125; 启动1$ ssserver -c /etc/shadowsocks.json -d start 查看相应的端口的监听状态 至此，不出意外的话，我们已经可以使用shadowsocks了。 总结 配置完以后如果还是不能使用，尝试本地ping包，确认服务器ip是否被限制(呃，一开始我就被进了这个坑了)。 相关请参考 VPS+SS搭建自己的VPN Ubuntu下shadowsocks 安装与配置（server and client） Shadowsocks Python版一键安装脚本]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>ss</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C指针与const限定符]]></title>
+    <url>%2F2017%2F10%2F07%2Fc-pointer-and-const%2F</url>
+    <content type="text"><![CDATA[指针在C语言里是精髓所在，也是C语言最吸引人的地方，它可以直接操作内存，在编写程序的过程中有着极大的发挥空间。有人也把指针说成是C语言的灵魂，用好指针是对C语言理解的一个质变。 指向const int型的指针123const int *a; int const *a; //a的类型为不带const限定的int*，指向一个带const限 //定的变量。 a所指向的内存单元是const int型，不可改写，所以(*a)++是不允许的，但a是可以改写的，所以a++是允许的。 指向int型的const指针12int * const a; //a的类型为带const限定l的int*型。指向一个 //不带const限定的int型变量。 a是一个指向int型的const指针，*a是可以改写的，但a不允许改写。 指向const int型的const指针12int const * const a; //a的类型为带const限定的int*型，指向一 //个带const 限定的int型变量 a是一个指向const int型的const指针，因此，*a和a都不允许改写。 指向字符串的指针123456789//字符串字面值类似于数组名，做右值使用时自动转换成指向首元素的指针。const char *p = "abcd"; //如果要定义一个指针指向字符串字面值， //这个指针应该是const char *型。const char strl[5] = "abcd";char str2[5] = "abcd";printf("%s", p); //printf函数原型为int printf(const char *format,...)printf(str1);printf(str2);printf("abcd"); const限定符的使用分清楚这三种情况，并灵活运用可以让你的程序更加的健壮，我们应该尽可能多的使用const限定符。 指向const变量的指针可以隐式转换成指向非const变量的指针 指向非const变量的指针可以传给指向const变量的指针，编译器可以做隐式类型转换。 12345678910char a = 'a';char *pa = &amp;a;const char *pt = pa;//指向const变量的指针或者const变量的地址不可以传给指向非const变量//的指针，以免通过后者意外改写了前者所指向的内存单元，例如对下面的//代码编译器会报警告const char c = 'c';const char *pc = &amp;c;char *pt = pc;]]></content>
+      <categories>
+        <category>编程语言</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>Pointer</tag>
+        <tag>const</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu 下安装配置NFS服务]]></title>
+    <url>%2F2017%2F10%2F07%2FConfig-nfs-on-ubuntu%2F</url>
+    <content type="text"><![CDATA[NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协定，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享个别的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。NFS 的基本原则是“容许不同的客户端及服务端通过一组RPC分享相同的文件系统”，它是独立于操作系统，容许不同硬件及操作系统的系统共同进行文件的分享。 安装nfs1$ sudo apt-get install nfs-kernel-server 配置nfs修改/etc/exports里的内容，在文件最后加入nfs文件夹的路径及权限。 1$ /work/nfs_root/first_nfs *(rw,sync,no_root_squash) *：允许所有的网段访问，也可以使用具体的IPrw：挂接此目录的客户端对该共享目录具有读写权限sync：资料同步写入内存和硬盘no_root_squash：root用户具有对根目录的完全管理访问权限 启动nfs1$ sudo /etc/init.d/nfs-kernel-server start 停止nfs1$ sudo /etc/init.d/nfs-kernel-server stop]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>nfs</tag>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[冒泡排序法和选择排序法]]></title>
+    <url>%2F2017%2F10%2F02%2Fbubblesort-and-selectionsort%2F</url>
+    <content type="text"><![CDATA[C语言中，常用的算法有：冒泡排序、快速排序、插入排序、选择排序、希尔排序、堆排序以及归并排序等等。那么从这篇开始，我将分别总结下这几种排序法。 先交代一下，我们将要排序的数组定义为arr[N],即数组arr[]包含N个元素。 冒泡排序法（Bubblesort）所谓排序法，就是对一组无序的序列进行有序的排序（从大到小或者从小到大），那么什么叫冒泡排序法，冒泡排序法又是怎么实现数组的有序排列呢。 冒泡排序法的具体实现方法是这样的，从数组的第一个元素arr[0]开始，两两比较(arr[n],arr[n+1])，如果前面的数大于后面的数（arr[n] &gt; arr[n+1]）,那么交换两个元素的位置，把大的数往后移动。这样依次经过一轮比较以后，最大的数将会被交换到最后的位置（arr[n-1]）。 先一起再来看看冒泡排序法是怎么排序的。 数组排序前 7 23 12 4 33 21 2 17 13 9第一轮排序 7 12 4 23 21 2 17 13 9 33第二轮排序 7 4 12 21 2 17 13 9 23第三轮排序 4 7 12 2 17 13 9 21第四轮排序 4 7 2 12 13 9 17第五轮排序 4 2 7 12 9 13第六轮排序 2 4 7 9 12第七轮排序 2 4 7 9第八轮排序 2 4 7第九轮排序 2 4 可以看到，每一轮的排序，在这一轮中参与比较的元素中最大的数将会浮到最后。而冒泡排序的名字也是从这里来的 。 C语言实现Bubblesort： 12345678910111213141516171819202122void bubblesort(int a[], int m)&#123; int i,j; int tmp; int flag = 0; //设定标志，如果第一次循环比较时没有发生交换，则说明数组是升序排序，不用排序，提前结束循环。 for(i = 0; i &lt; m; i++) //外层循环控制循环次数 &#123; for(j = 0; j &lt; m-1-i; j++) //内层循环控制每次循环里比较的次数。 &#123; tmp = a[j]; a[j] = a[j+1]; a[j+1] = tmp; flag = 1; &#125; &#125; if(0 == flag) &#123; printf("No Sort\n"); break; &#125;&#125; 选择排序法（Selectionsort）所谓的选择是什么意思呢，选择就是于万千花丛中择其一，在选择排序法中说的就是，每一次循环过程中，通过比较选择出你需要的最值。 选择排序法的过程是，通过比较，选择出每一轮中最值元素，然后把他和这一轮中最最前面的元素交换，所以这个算法关键是要记录每次比较的结果，即每次比较后最值位置（下标）。 先来看看选择排序的过程： 数组排序前 7 23 12 4 33 21 2 17 13 9第一轮循环 2 23 12 4 33 21 7 17 13 9第二轮循环…4 12 23 33 21 7 17 13 9第三轮循环….. 7 23 33 21 12 17 13 9第四轮循环……. 9 33 21 12 17 13 23第五轮循环……… 12 21 33 17 13 23第六轮循环……………13 33 17 21 23第七轮循环………………17 33 21 23第八轮循环…………………21 33 22第九轮循环……………………22 33 通过这个过程，我们可以看到，每轮循环过程中，都会找出这个最值元素，下一轮排序时就不用再考虑这个元素了。 C语言实现（Selectionsort） 123456789101112131415161718192021222324void selectionsort(int a[],int m)&#123; int i,j; int k; int tmp; for(i = 0; i &amp;lt; m-1; i++)//控制循环次数，n个数需要n-1次循环 &#123; k = i; for(j = i+1; j &amp;lt; m ; j++) &#123; if(a[j] &amp;lt; a[k]) k = j; &#125; //i不等于k是就证明a[i]不是最小的， //i等于k时证明a[i]就是本轮比较过程中最小的值 if(i != k) &#123; tmp = a[i]; a[i] = a[k]; a[k] = tmp; &#125; &#125;&#125; 总结冒泡排序法是两两依次比较，并做交换，交换的次数多。选择排序法是每次循环找出最值，循环结束后将最值调整到合适位置，交换的次数少。]]></content>
+      <categories>
+        <category>算法设计</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>冒泡排序法</tag>
+        <tag>选择排序法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2017%2F10%2F02%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <tags>
+        <tag>hello hexo</tag>
+      </tags>
+  </entry>
+</search>
